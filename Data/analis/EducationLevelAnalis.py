@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 pd.set_option('display.float_format', '{:.2f}'.format)
 
 # Загрузка данных
-data = pd.read_csv('hh_ru_dataset.csv')
+data = pd.read_csv('../hh_ru_dataset.csv')
 data_copy = data.copy()
 
 # Очистка датасета от столбцов, по которым не будет проводиться анализ
