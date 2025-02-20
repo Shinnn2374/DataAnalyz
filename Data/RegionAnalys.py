@@ -12,20 +12,35 @@ data_copy = data_copy.drop(columns=['topic_id', 'resume_id','resume_skills_list'
 # Анализ регионов
 
 # 1. Распределение резюме и вакансий по регионам
+print('Распределение резюме и вакансий по регионам')
+print('_____________________________________________________________________')
 resume_by_region = data_copy['resume_region'].value_counts().head(10)  # Топ-10 регионов по резюме
+print(f'Топ-10 регионов по резюме: {resume_by_region}')
+print('_____________________________________________________________________')
 vacancy_by_region = data_copy['vacancy_region'].value_counts().head(10)  # Топ-10 регионов по вакансиям
+print(f'Топ-10 регионов по вакансиям: {vacancy_by_region}')
+print('_____________________________________________________________________')
 
 # 2. Сравнение ожидаемых и предлагаемых зарплат по регионам
 # Средняя ожидаемая зарплата по регионам (из резюме)
 avg_expected_salary_by_region = data_copy.groupby('resume_region')['expected_salary'].mean().sort_values(ascending=False)
+print(f'Средняя ожидаемая зарплата по регионам (из резюме): {avg_expected_salary_by_region}')
+print('_____________________________________________________________________')
 
 # Средняя предлагаемая зарплата по регионам (из вакансий)
 avg_compensation_by_region = data_copy.groupby('vacancy_region')[['compensation_from', 'compensation_to']].mean()
 avg_compensation_by_region['avg_compensation'] = (avg_compensation_by_region['compensation_from'] + avg_compensation_by_region['compensation_to']) / 2
+print(f'Средняя предлагаемая зарплата по регионам (из вакансий): {avg_compensation_by_region}')
+print('_____________________________________________________________________')
 
 # 3. Анализ готовности к переезду
 relocation_stats = data_copy['relocation_status'].value_counts(normalize=True) * 100  # Процент готовых к переезду
 top_relocation_regions = data_copy[data_copy['relocation_status'] == 'готов к переезду']['resume_region'].value_counts().head(10)  # Топ-10 регионов для переезда
+print(f'Процент готовых к переезду: {relocation_stats}')
+print('_____________________________________________________________________')
+print(f'Топ-10 регионов для переезда: {relocation_stats}')
+print('_____________________________________________________________________')
+
 
 # Визуализация
 plt.figure(figsize=(15, 18))
