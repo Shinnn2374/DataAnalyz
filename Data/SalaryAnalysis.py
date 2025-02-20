@@ -16,10 +16,14 @@ data_copy = data_copy.drop(columns=['topic_id', 'resume_id', 'resume_skills_list
 # Средняя ожидаемая зарплата (из резюме)
 avg_expected_salary = data_copy['expected_salary'].mean()
 print(f'Средняя ожидаемая зарплата (из резюме): {avg_expected_salary:.2f}')
+print('_____________________________________________________________________')
+
 
 # Средняя предлагаемая зарплата (из вакансий)
 avg_compensation = (data_copy['compensation_from'].mean() + data_copy['compensation_to'].mean()) / 2
 print(f'Средняя предлагаемая зарплата (из вакансий): {avg_compensation:.2f}')
+print('_____________________________________________________________________')
+
 
 # Сравнение в виде графика
 plt.figure(figsize=(8, 6))
@@ -33,6 +37,8 @@ plt.show()
 avg_salary_by_profession = data_copy.groupby('profession')['expected_salary'].mean().sort_values(ascending=False).head(10)
 print('Средняя ожидаемая зарплата по профессиям:')
 print(avg_salary_by_profession.to_string())
+print('_____________________________________________________________________')
+
 
 # Средняя предлагаемая зарплата по профессиям
 avg_compensation_by_profession = data_copy.groupby('vacancy_employment_type')[['compensation_from', 'compensation_to']].mean()
@@ -40,11 +46,15 @@ avg_compensation_by_profession['avg_compensation'] = (avg_compensation_by_profes
 avg_compensation_by_profession = avg_compensation_by_profession['avg_compensation'].sort_values(ascending=False).head(10)
 print('Средняя предлагаемая зарплата по профессиям:')
 print(avg_compensation_by_profession.to_string())
+print('_____________________________________________________________________')
+
 
 # Средняя ожидаемая зарплата по регионам
 avg_salary_by_region = data_copy.groupby('resume_region')['expected_salary'].mean().sort_values(ascending=False).head(10)
 print('Средняя ожидаемая зарплата по регионам:')
 print(avg_salary_by_region.to_string())
+print('_____________________________________________________________________')
+
 
 # Средняя предлагаемая зарплата по регионам
 avg_compensation_by_region = data_copy.groupby('vacancy_region')[['compensation_from', 'compensation_to']].mean()
@@ -52,6 +62,8 @@ avg_compensation_by_region['avg_compensation'] = (avg_compensation_by_region['co
 avg_compensation_by_region = avg_compensation_by_region['avg_compensation'].sort_values(ascending=False).head(10)
 print('Средняя предлагаемая зарплата по регионам:')
 print(avg_compensation_by_region.to_string())
+print('_____________________________________________________________________')
+
 
 # График: Средние зарплаты по профессиям
 plt.figure(figsize=(12, 6))
@@ -82,6 +94,8 @@ plt.show()
 avg_salary_by_education = data_copy.groupby('education_level')['expected_salary'].mean().sort_values(ascending=False)
 print('Средняя ожидаемая зарплата по уровню образования:')
 print(avg_salary_by_education.to_string())
+print('_____________________________________________________________________')
+
 
 # Средняя предлагаемая зарплата по уровню образования
 avg_compensation_by_education = data_copy.groupby('education_level')[['compensation_from', 'compensation_to']].mean()
@@ -89,6 +103,8 @@ avg_compensation_by_education['avg_compensation'] = (avg_compensation_by_educati
 avg_compensation_by_education = avg_compensation_by_education['avg_compensation'].sort_values(ascending=False)
 print('Средняя предлагаемая зарплата по уровню образования:')
 print(avg_compensation_by_education.to_string())
+print('_____________________________________________________________________')
+
 
 # График: Зарплаты в зависимости от уровня образования
 plt.figure(figsize=(12, 6))

@@ -13,36 +13,56 @@ data_copy = data_copy.drop(columns=['topic_id', 'resume_id','resume_skills_list'
 
 # 1. Топ-10 самых популярных профессий в резюме
 top_resume_professions = data_copy['profession'].value_counts().head(10)
+print(f'Топ-10 самых популярных профессий в резюме: {top_resume_professions}')
+print('_____________________________________________________________________')
+
 
 # 2. Топ-10 самых популярных профессий в вакансиях
 top_vacancy_professions = data_copy['vacancy_employment_type'].value_counts().head(10)
+print(f'Топ-10 самых популярных профессий в вакансиях: {top_vacancy_professions}')
+print('_____________________________________________________________________')
 
 # 3. Соответствие профессий в резюме и вакансиях
 profession_match = pd.crosstab(data_copy['profession'], data_copy['vacancy_employment_type'])
+print(f'Соответствие профессий в резюме и вакансиях: {profession_match}')
+print('_____________________________________________________________________')
+
 
 # 4. Профессии с самыми высокими и самыми низкими зарплатами
 # Средняя ожидаемая зарплата по профессиям в резюме
 avg_salary_by_profession = data_copy.groupby('profession')['expected_salary'].mean().sort_values(ascending=False)
+print(f'Средняя ожидаемая зарплата по профессиям в резюме: {avg_salary_by_profession}')
+print('_____________________________________________________________________')
 
 # Средняя предлагаемая зарплата по профессиям в вакансиях
 avg_compensation_by_profession = data_copy.groupby('vacancy_employment_type')[['compensation_from', 'compensation_to']].mean()
 avg_compensation_by_profession['avg_compensation'] = (avg_compensation_by_profession['compensation_from'] + avg_compensation_by_profession['compensation_to']) / 2
+print(f'Средняя предлагаемая зарплата по профессиям в вакансиях: {avg_compensation_by_profession}')
+print('_____________________________________________________________________')
 
 # Визуализация
 plt.figure(figsize=(15, 10))
 
 # 1. Топ-10 самых популярных профессий в резюме
 top_resume_professions = data_copy['profession'].value_counts().head(10)
+print(f'Топ-10 самых популярных профессий в резюме: {top_resume_professions}')
+print('_____________________________________________________________________')
 
 # 2. Топ-10 самых популярных профессий в вакансиях
 top_vacancy_professions = data_copy['vacancy_employment_type'].value_counts().head(10)
+print(f'Топ-10 самых популярных профессий в вакансиях: {top_vacancy_professions}')
+print('_____________________________________________________________________')
 
 # 3. Профессии с самыми высокими зарплатами (резюме)
 avg_salary_by_profession = data_copy.groupby('profession')['expected_salary'].mean().sort_values(ascending=False)
+print(f'Профессии с самыми высокими зарплатами (резюме): {avg_salary_by_profession}')
+print('_____________________________________________________________________')
 
 # 4. Профессии с самыми высокими зарплатами (вакансии)
 avg_compensation_by_profession = data_copy.groupby('vacancy_employment_type')[['compensation_from', 'compensation_to']].mean()
 avg_compensation_by_profession['avg_compensation'] = (avg_compensation_by_profession['compensation_from'] + avg_compensation_by_profession['compensation_to']) / 2
+print(f'Профессии с самыми высокими зарплатами (вакансии): {avg_compensation_by_profession}')
+print('_____________________________________________________________________')
 
 # График 1: Топ-10 профессий в резюме
 plt.figure(figsize=(12, 6))  # Увеличиваем размер графика
