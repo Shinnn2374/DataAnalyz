@@ -26,12 +26,30 @@ plt.show()
 # Группировка данных по регионам и расчет средней зарплаты
 avg_salary_by_region = data.groupby('resume_region')['expected_salary'].mean().sort_values(ascending=False)
 print(f'Группировка данных по регионам и расчет средней зарплаты: {avg_salary_by_region}')
+print('_____________________________________________________________________')
 
 # Визуализация
 plt.figure(figsize=(12, 8))
 avg_salary_by_region.head(20).plot(kind='bar', color='lightgreen')  # Топ-20 регионов
 plt.title('Средняя ожидаемая зарплата по регионам', fontsize=16)
 plt.xlabel('Регион', fontsize=14)
+plt.ylabel('Средняя зарплата', fontsize=14)
+plt.xticks(rotation=45, ha='right')
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.tight_layout()
+plt.show()
+
+# Группировка данных по уровню образования и расчет средней зарплаты
+avg_salary_by_education = data.groupby('education_level')['expected_salary'].mean().sort_values(ascending=False)
+print(f'Группировка данных по уровню образования и расчет средней зарплаты: {avg_salary_by_education}')
+print('_____________________________________________________________________')
+
+
+# Визуализация
+plt.figure(figsize=(10, 6))
+sns.barplot(x=avg_salary_by_education.index, y=avg_salary_by_education.values, palette='viridis')
+plt.title('Средняя ожидаемая зарплата по уровню образования', fontsize=16)
+plt.xlabel('Уровень образования', fontsize=14)
 plt.ylabel('Средняя зарплата', fontsize=14)
 plt.xticks(rotation=45, ha='right')
 plt.grid(axis='y', linestyle='--', alpha=0.7)
