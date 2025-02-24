@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 # Загрузка датасета
-df = pd.read_csv('Analysis/datas/hh_ru_dataset.csv')
+df = pd.read_csv('hh_ru_dataset.csv')
 
 # Удаление дубликатов
 df.drop_duplicates(inplace=True)
